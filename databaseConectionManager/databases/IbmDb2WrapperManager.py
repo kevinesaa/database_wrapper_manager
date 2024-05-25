@@ -1,10 +1,10 @@
-from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManger
+from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
 from typing import List
 
 
 
 
-class IbmDb2WrapperManager(DatabaseWrapperManger):
+class IbmDb2WrapperManager(DatabaseWrapperManager):
 
     def __init__(self,dbConnection):
         super().__init__(dbConnection)

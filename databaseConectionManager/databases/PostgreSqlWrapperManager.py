@@ -1,9 +1,9 @@
 #import psycopg2
 #from psycopg2 import OperationalError
-from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManger
+from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
 from typing import List
 
-class PostgreSqlWrapperManager(DatabaseWrapperManger):
+class PostgreSqlWrapperManager(DatabaseWrapperManager):
 
     def __init__(self,dbConnection):
         super().__init__(dbConnection)

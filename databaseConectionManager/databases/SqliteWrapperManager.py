@@ -1,8 +1,8 @@
-from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManger
+from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
 from typing import List
 
 
-class SqliteWrapperManager(DatabaseWrapperManger):
+class SqliteWrapperManager(DatabaseWrapperManager):
 
     def __init__(self,dbConnection):
         super().__init__(dbConnection)

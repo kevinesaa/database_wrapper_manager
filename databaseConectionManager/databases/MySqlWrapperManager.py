@@ -1,10 +1,10 @@
 #import pymysql
 
-from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManger
+from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
 from typing import List
 
 
-class MySqlWrapperManager(DatabaseWrapperManger):
+class MySqlWrapperManager(DatabaseWrapperManager):
 
     def __init__(self,dbConnection):
         super().__init__(dbConnection)

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-class DatabaseWrapperManger(ABC) :
+class DatabaseWrapperManager(ABC) :
 
     def __init__(self, dbConnection) :
         self.__connection = dbConnection
