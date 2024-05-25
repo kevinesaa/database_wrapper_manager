@@ -24,7 +24,7 @@ class _IbmDb2OdbcSqlCommand(SqlCommand):
         for row in cursor.fetchall():
             result.append({column[0]: SqlCommand.convertToJsonSerializable(value) 
                            for column, value in zip(cursor.description, row)})
-    
+        return result
     
     def executeOneStatement(cursor,queryString:str,params:tuple=None) -> int:
         

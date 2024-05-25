@@ -15,11 +15,8 @@ def _getSecretManagerString(awsRegion:str, secretManagerArn:str) -> str :
     # a trip could be add the dbType value to the secret manager
     secret : str ='''
         {
-            "db_type": "IBM_DB2_ODBC",
-            "db_host":"localhost",
-            "db_name":"example",
-            "db_user":"admin",
-            "db_pass":"12345678"
+            "db_type": "SQLITE",
+            "db_path":"users.db"
         }
         '''
     secret = " ".join([ line.strip() for line in secret.splitlines()])
@@ -32,21 +29,7 @@ def _cretateDbConection(secretManagerJsonObject:dict[str,object]) -> object:
     
     # here add the logic to create a specific database connection
 
-    # this is a example from a IBM i access DB2 data base
-    # https://www.ibm.com/docs/en/i/7.4?topic=details-connection-string-keywords
-    dbConfib= {
-        "DRIVER": "IBM i Access ODBC Driver",
-        "SYSTEM": secretManagerJsonObject["db_host"],
-        "DATABASE": secretManagerJsonObject["db_name"],
-        "UID": secretManagerJsonObject["db_user"],
-        "PWD": secretManagerJsonObject["db_pass"],
-    } 
-
-    connectionString = ";".join(
-        f"{k}={v}" for k, v in dbConfib.items()
-    )
-
-    return pyodbc.connect(connectionString)
+    return sqlite3.connect(secretManagerJsonObject["db_path"])
 
 
 def createDatabseManager(dbType: DatabaseType, awsRegion:str, secretManagerArn:str) -> DatabaseWrapperManager :
