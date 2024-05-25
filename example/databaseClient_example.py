@@ -19,7 +19,7 @@ def excuteCliente(event={}, context={}):
     myRegion : str = "us-west-2" # change by os.environ['AWS_REGION']
     mySecrectManagerArn : str = "" #set as environment
     databaseManager : DatabaseWrapperManager =  createDatabaseManager(DatabaseType.SQLITE, myRegion, mySecrectManagerArn)
-    rows : list[dict[str,object]] = databaseManager.getRows("SELECT * FROM users")
+    rows : list[dict[str,object]] = databaseManager.executeQuery("SELECT * FROM users")
     databaseManager.closeConection()
 
     return {}

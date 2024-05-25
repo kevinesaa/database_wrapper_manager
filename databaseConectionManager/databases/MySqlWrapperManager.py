@@ -1,7 +1,7 @@
 #import pymysql
 
 from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
-from typing import List
+
 
 
 class MySqlWrapperManager(DatabaseWrapperManager):
@@ -10,12 +10,14 @@ class MySqlWrapperManager(DatabaseWrapperManager):
         super().__init__(dbConnection)
         #self.conection
 
-    def getRows(self,queryString:str,params=None) -> List:
+    def executeQuery(self,queryString:str,params:list=None) -> list[dict[str,object]]:
         print("get rows from my sql")
         
-    def executeQuery(self,queryString:str,params=None) -> None :
+    def executeOneStatement(self,queryString:str,params=None) :
         print("execuete from my sql")
         
+    def executeBulkStatement(self,queryString:str,params=None) -> None:
+        pass
     
     def closeConection(self) -> None:
         print("close conection from my sql")
