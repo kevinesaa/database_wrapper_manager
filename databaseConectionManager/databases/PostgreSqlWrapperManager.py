@@ -1,7 +1,6 @@
-#import psycopg2
-#from psycopg2 import OperationalError
 from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
-
+from databaseConectionManager.core.DatabaseWrapperManager import SqlCommand
+from databaseConectionManager.core.DatabaseWrapperManager import TransactionWrapper
 
 class PostgreSqlWrapperManager(DatabaseWrapperManager):
 
@@ -28,6 +27,9 @@ class PostgreSqlWrapperManager(DatabaseWrapperManager):
         print("execute query from my postgre")
         
     def executeBulkStatement(self,queryString:str,params=None) -> None:
+        pass
+    
+    def startTransaction(self) -> TransactionWrapper:
         pass
     
     def closeConection(self) -> None:

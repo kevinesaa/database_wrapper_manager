@@ -1,5 +1,6 @@
 from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
-
+from databaseConectionManager.core.DatabaseWrapperManager import SqlCommand
+from databaseConectionManager.core.DatabaseWrapperManager import TransactionWrapper
 
 
 class MsSqlServerWrapperManager(DatabaseWrapperManager):
@@ -15,6 +16,9 @@ class MsSqlServerWrapperManager(DatabaseWrapperManager):
         print("execuete from ms sql server")
         
     def executeBulkStatement(self,queryString:str,params=None) -> None:
+        pass
+    
+    def startTransaction(self) -> TransactionWrapper:
         pass
     
     def closeConection(self) -> None:

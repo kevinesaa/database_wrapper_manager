@@ -1,5 +1,6 @@
 from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
-
+from databaseConectionManager.core.DatabaseWrapperManager import SqlCommand
+from databaseConectionManager.core.DatabaseWrapperManager import TransactionWrapper
 
 
 class SqliteWrapperManager(DatabaseWrapperManager):
@@ -15,6 +16,9 @@ class SqliteWrapperManager(DatabaseWrapperManager):
         print("execuete from sqlite")
         
     def executeBulkStatement(self,queryString:str,params=None) -> None:
+        pass
+    
+    def startTransaction(self) -> TransactionWrapper:
         pass
     
     def closeConection(self) -> None:

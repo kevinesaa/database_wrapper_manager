@@ -1,7 +1,6 @@
-#import pymysql
-
 from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
-
+from databaseConectionManager.core.DatabaseWrapperManager import SqlCommand
+from databaseConectionManager.core.DatabaseWrapperManager import TransactionWrapper
 
 
 class MySqlWrapperManager(DatabaseWrapperManager):
@@ -17,6 +16,9 @@ class MySqlWrapperManager(DatabaseWrapperManager):
         print("execuete from my sql")
         
     def executeBulkStatement(self,queryString:str,params=None) -> None:
+        pass
+    
+    def startTransaction(self) -> TransactionWrapper:
         pass
     
     def closeConection(self) -> None:
