@@ -7,4 +7,6 @@ class DatabaseType(Enum):
     POSTGRE_SQL = 2
     SQLITE = 3
     MS_SQL_SERVER = 4
-    IBM_DB2 = 5
+    
+    '''this work with pyodbc. More info at: https://github.com/mkleehammer/pyodbc/wiki'''
+    IBM_DB2_ODBC = 5 

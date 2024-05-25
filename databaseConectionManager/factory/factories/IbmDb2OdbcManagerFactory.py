@@ -1,8 +1,8 @@
 from databaseConectionManager.factory.factories.DatabaseManagerFactory import DatabaseManagerFactory
 from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
-from databaseConectionManager.databases.IbmDb2WrapperManager import IbmDb2WrapperManager
+from databaseConectionManager.databases.IbmDb2OdbcWrapperManager import IbmDb2OdbcWrapperManager
 
-class ImbDb2ManagerFactory(DatabaseManagerFactory):
+class ImbDb2OdbcManagerFactory(DatabaseManagerFactory):
     
     def createDatabaseManager(self, connection) -> DatabaseWrapperManager: 
-        return IbmDb2WrapperManager(connection)
+        return IbmDb2OdbcWrapperManager(connection)

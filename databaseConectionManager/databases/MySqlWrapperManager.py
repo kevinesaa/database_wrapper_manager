@@ -10,10 +10,10 @@ class MySqlWrapperManager(DatabaseWrapperManager):
         super().__init__(dbConnection)
         #self.conection
 
-    def getRows(self,quearyString:str,params=None) -> List:
+    def getRows(self,queryString:str,params=None) -> List:
         print("get rows from my sql")
         
-    def executeQuery(self,quearyString:str,params=None) -> None :
+    def executeQuery(self,queryString:str,params=None) -> None :
         print("execuete from my sql")
         
     

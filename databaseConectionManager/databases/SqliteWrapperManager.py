@@ -8,10 +8,10 @@ class SqliteWrapperManager(DatabaseWrapperManager):
         super().__init__(dbConnection)
         
 
-    def getRows(self,quearyString:str,params=None) -> List:
+    def getRows(self,queryString:str,params=None) -> List:
         print("get rows from sqlite")
         
-    def executeQuery(self,quearyString:str,params=None) -> None :
+    def executeQuery(self,queryString:str,params=None) -> None :
         print("execuete from sqlite")
         
     

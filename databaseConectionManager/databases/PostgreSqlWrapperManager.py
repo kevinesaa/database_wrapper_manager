@@ -10,12 +10,12 @@ class PostgreSqlWrapperManager(DatabaseWrapperManager):
         #self.conection
         pass
 
-    def getRows(self,quearyString:str,params=None) -> List:
+    def getRows(self,queryString:str,params=None) -> List:
         '''
         cursor = self.connection.cursor()
         try:
             
-            cursor.execute(quearyString)
+            cursor.execute(queryString)
             
             return cursor.fetchall()
         except OperationalError as e:
@@ -24,7 +24,7 @@ class PostgreSqlWrapperManager(DatabaseWrapperManager):
         '''
         print("get rows from my postgre")
     
-    def executeQuery(self,quearyString:str,params=None) -> None :
+    def executeQuery(self,queryString:str,params=None) -> None :
         print("execute query from my postgre")
         
     

@@ -12,11 +12,13 @@ from databaseConectionManager.core.SupportedDatabasesEnum import DatabaseType
 def _getSecretManagerString(awsRegion:str, secretManagerArn:str) -> str :
     
     # here make your logic to get the secret str with boto3
+    # a trip could be add the dbType value to the secret manager
     secret : str ='''
         {
+            "db_type": "IBM_DB2_ODBC",
             "db_host":"localhost",
             "db_name":"example",
-            "db_user":"admin"
+            "db_user":"admin",
             "db_pass":"12345678"
         }
         '''
@@ -49,8 +51,14 @@ def _cretateDbConection(secretManagerJsonObject:dict[str,object]) -> object:
 
 def createDatabseManager(dbType: DatabaseType, awsRegion:str, secretManagerArn:str) -> DatabaseWrapperManager :
     
+    # a trip could be add the dbType value to the secret manager
     databaseSecretString = _getSecretManagerString(awsRegion, secretManagerArn)
     databaseSecretJson = json.loads(databaseSecretString)
     dbConection = _cretateDbConection(databaseSecretJson)
+    
+    # with the trip the return looks something like
+    # dbTypeName = databaseSecretJson['db_type']
+    # dbType = DatabaseType[dbTypeName]
+    # return DatabaseSimpleFactory.createDatabaseManager(dbType,dbConection)
     
     return DatabaseSimpleFactory.createDatabaseManager(dbType,dbConection)
