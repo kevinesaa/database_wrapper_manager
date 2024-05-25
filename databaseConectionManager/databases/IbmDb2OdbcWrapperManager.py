@@ -49,7 +49,6 @@ class _IbmDb2OdbcTransactionWrapper(TransactionWrapper):
     def __init__(self, dbManager,id) :
         super().__init__(self,dbManager)
         self._cursor = dbManager.connection.cursor()
-        dbManager.connection.autocommit = False
         self._id = id
     
     def _finishTransaction(self) -> None:
@@ -72,7 +71,7 @@ class _IbmDb2OdbcTransactionWrapper(TransactionWrapper):
     
     def executeOneStatement(self,queryString:str,params:tuple=None) -> int:
         cursor = self._cursor
-        
+        return _IbmDb2OdbcSqlCommand.executeOneStatement(cursor,queryString,params)
     
     def executeBulkStatement(self,queryString:str,params:list[tuple]=None) -> None:
         cursor = self._cursor
@@ -114,6 +113,7 @@ class IbmDb2OdbcWrapperManager(DatabaseWrapperManager):
     def startTransaction(self) -> TransactionWrapper:
         id = datetime.now().strftime('%Y%m%d%H%M%S')
         self._transactionInProgress.append(id)
+        self.connection.autocommit = False
         return _IbmDb2OdbcTransactionWrapper(self,id)        
     
     def closeConection(self) -> None:

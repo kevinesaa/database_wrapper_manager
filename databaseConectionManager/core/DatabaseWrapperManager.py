@@ -13,7 +13,7 @@ class SqlCommand(ABC):
         pass
     
     @abstractmethod
-    def executeOneStatement(cursor,queryString:str,params=None) :
+    def executeOneStatement(cursor,queryString:str,params=None) -> int:
         pass
     
     @abstractmethod
@@ -63,7 +63,7 @@ class DatabaseWrapperManager(ABC) :
         pass
     
     @abstractmethod
-    def executeOneStatement(self,queryString:str,params=None) :
+    def executeOneStatement(self,queryString:str,params=None) -> int :
         pass
     
     @abstractmethod
