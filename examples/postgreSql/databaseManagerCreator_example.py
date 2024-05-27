@@ -1,6 +1,4 @@
-
-import pyodbc # replace this line with your specific database engine, example: import sqlite3
-
+import psycopg2
 import json
 
 from src import DatabaseWrapperManager
@@ -16,6 +14,7 @@ def _getSecretManagerString(awsRegion:str, secretManagerArn:str) -> str :
             "db_name":"example",
             "db_user":"admin",
             "db_pass":"12345678"
+            "db_port":5432
         }
         '''
     secret = " ".join([ line.strip() for line in secret.splitlines()])
@@ -27,28 +26,22 @@ def _getSecretManagerString(awsRegion:str, secretManagerArn:str) -> str :
 def _cretateDbConection(secretManagerJsonObject:dict[str,object]) -> object:
     
     # here add the logic to create a specific database connection
-    # https://www.ibm.com/docs/en/i/7.4?topic=details-connection-string-keywords
-    dbConfib= {
-        "DRIVER": "IBM i Access ODBC Driver",
-        "SYSTEM": secretManagerJsonObject["db_host"],
-        "DATABASE": secretManagerJsonObject["db_name"],
-        "UID": secretManagerJsonObject["db_user"],
-        "PWD": secretManagerJsonObject["db_pass"],
-    } 
-
-    connectionString = ";".join(
-        f"{k}={v}" for k, v in dbConfib.items()
-    )
-
-    return pyodbc.connect(connectionString)
+    
+    return psycopg2.connect(
+        host = secretManagerJsonObject["db_host"],
+        port = int(secretManagerJsonObject["db_host"]),
+        user = secretManagerJsonObject["db_user"],
+        password = secretManagerJsonObject["db_pass"],
+        database = secretManagerJsonObject["db_name"]
+    )  
+    
 
 
 def createDatabseManager(awsRegion:str, secretManagerArn:str) -> DatabaseWrapperManager :
     
-    
+    # a trip could be add the dbType value to the secret manager
     databaseSecretString = _getSecretManagerString(awsRegion, secretManagerArn)
     databaseSecretJson = json.loads(databaseSecretString)
     dbConection = _cretateDbConection(databaseSecretJson)
     
-   
     return DatabaseWrapperManager(dbConection)

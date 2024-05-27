@@ -1,4 +1,4 @@
-import pymssql 
+import pymssql # https://www.pymssql.org/ref/pymssql.html
 import json
 
 from src import DatabaseWrapperManager
@@ -10,7 +10,6 @@ def _getSecretManagerString(awsRegion:str, secretManagerArn:str) -> str :
     # a trip could be add the dbType value to the secret manager
     secret : str ='''
         {
-            "db_type": "MS_SQL_SERVER",
             "db_host":"localhost",
             "db_name":"example",
             "db_user":"admin",
@@ -38,7 +37,6 @@ def _cretateDbConection(secretManagerJsonObject:dict[str,object]) -> object:
 
 def createDatabseManager(awsRegion:str, secretManagerArn:str) -> DatabaseWrapperManager :
     
-    # a trip could be add the dbType value to the secret manager
     databaseSecretString = _getSecretManagerString(awsRegion, secretManagerArn)
     databaseSecretJson = json.loads(databaseSecretString)
     dbConection = _cretateDbConection(databaseSecretJson)

@@ -14,7 +14,6 @@ def _getSecretManagerString(awsRegion:str, secretManagerArn:str) -> str :
     # a trip could be add the dbType value to the secret manager
     secret : str ='''
         {
-            "db_type": "SQLITE",
             "db_path":"users.db"
         }
         '''

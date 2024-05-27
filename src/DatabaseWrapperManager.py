@@ -1,7 +1,7 @@
 from datetime import datetime
-from SqlCommandExecutor import SqlCommandExecutor
-from TransactionWrapper import TransactionWrapper
-from IDatabaseManager import IDatabaseManager
+from src.SqlCommandExecutor import SqlCommandExecutor
+from src.TransactionWrapper import TransactionWrapper
+from src.IDatabaseManager import IDatabaseManager
 
 
 class DatabaseWrapperManager(IDatabaseManager):

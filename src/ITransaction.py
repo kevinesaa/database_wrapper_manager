@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from IDatabaseManager import IDatabaseManager
+from src.IDatabaseManager import IDatabaseManager
 
 class ITransaction(ABC):
     

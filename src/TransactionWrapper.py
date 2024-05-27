@@ -1,6 +1,6 @@
-from SqlCommandExecutor import SqlCommandExecutor
-from IDatabaseManager import IDatabaseManager
-from ITransaction import ITransaction
+from src.SqlCommandExecutor import SqlCommandExecutor
+from src.IDatabaseManager import IDatabaseManager
+from src.ITransaction import ITransaction
 
 class TransactionWrapper(ITransaction):
     
