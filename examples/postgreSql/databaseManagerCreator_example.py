@@ -7,7 +7,6 @@ from src import DatabaseWrapperManager
 def _getSecretManagerString(awsRegion:str, secretManagerArn:str) -> str :
     
     # here make your logic to get the secret str with boto3
-    # a trip could be add the dbType value to the secret manager
     secret : str ='''
         {
             "db_host":"localhost",
@@ -39,7 +38,6 @@ def _cretateDbConection(secretManagerJsonObject:dict[str,object]) -> object:
 
 def createDatabseManager(awsRegion:str, secretManagerArn:str) -> DatabaseWrapperManager :
     
-    # a trip could be add the dbType value to the secret manager
     databaseSecretString = _getSecretManagerString(awsRegion, secretManagerArn)
     databaseSecretJson = json.loads(databaseSecretString)
     dbConection = _cretateDbConection(databaseSecretJson)
