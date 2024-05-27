@@ -1,7 +1,7 @@
 import pymssql 
 import json
 
-from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
+from src import DatabaseWrapperManager
 
 
 def _getSecretManagerString(awsRegion:str, secretManagerArn:str) -> str :

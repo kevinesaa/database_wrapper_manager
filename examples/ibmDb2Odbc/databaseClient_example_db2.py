@@ -1,6 +1,6 @@
 
 
-from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
+from src import DatabaseWrapperManager
 
 from examples.ibmDb2Odbc import databaseManagerCreator_example
 

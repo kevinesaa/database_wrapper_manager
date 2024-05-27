@@ -1,4 +1,4 @@
-from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
+from src import DatabaseWrapperManager
 
 from examples.msSqlServer import databaseManagerCreator_example
 

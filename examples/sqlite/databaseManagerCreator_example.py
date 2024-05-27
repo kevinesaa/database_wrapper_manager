@@ -3,7 +3,7 @@ import sqlite3 # replace this line with your specific database engine, example: 
 
 import json
 
-from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
+from src import DatabaseWrapperManager
 
 
 
