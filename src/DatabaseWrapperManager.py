@@ -1,8 +1,8 @@
 from datetime import datetime
-from src.SqlCommandExecutor import SqlCommandExecutor
-from src.TransactionWrapper import TransactionWrapper
-from src.IDatabaseManager import IDatabaseManager
 
+from . import TransactionWrapper
+from .core import SqlCommandExecutor
+from .core import IDatabaseManager
 
 class DatabaseWrapperManager(IDatabaseManager):
 

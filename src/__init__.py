@@ -1,3 +1,3 @@
 
-from src.DatabaseWrapperManager import DatabaseWrapperManager
-from src.TransactionWrapper import TransactionWrapper
+from .DatabaseWrapperManager import DatabaseWrapperManager
+from .TransactionWrapper import TransactionWrapper
