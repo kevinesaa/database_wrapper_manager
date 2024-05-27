@@ -1,79 +1,56 @@
-from abc import ABC, abstractmethod
 from datetime import datetime
+from SqlCommandExecutor import SqlCommandExecutor
+from TransactionWrapper import TransactionWrapper
+from IDatabaseManager import IDatabaseManager
 
-class SqlCommand(ABC):
 
-    def convertToJsonSerializable(obj):
-        if isinstance(obj, datetime):
-            return obj.isoformat()
-        return obj
-    
-    @abstractmethod
-    def executeQuery(cursor,queryString:str,params:list=None) -> list[dict[str,object]]:
-        pass
-    
-    @abstractmethod
-    def executeOneStatement(cursor,queryString:str,params=None) -> int:
-        pass
-    
-    @abstractmethod
-    def executeBulkStatement(cursor,queryString:str,params=None) -> None:
-        pass
-class TransactionWrapper(ABC):
-    
-    def __init__(self,dbManager) :
-        self.__dbManager = dbManager
-    
-    @property
-    def dbManager(self) :
-        return self.__dbManager
+class DatabaseWrapperManager(IDatabaseManager):
 
-    @property
-    def dbManager(self,manager) :
-        self.__dbManager = manager
-
-    @abstractmethod
-    def commit(self) -> None:
-        pass
-    @abstractmethod
-    def rollback(self) -> None:
-        pass
-    @abstractmethod
+    def __init__(self,dbConnection):
+        super().__init__(dbConnection)
+        dbConnection.autocommit = False
+        self._transactionInProgress = []
+        
     def executeQuery(self,queryString:str,params:list[tuple]=None) -> list[dict[str,object]]:
-        pass
-    @abstractmethod
+        
+        self._raiseOnTransactionInProgress()
+        
+        cursor = self.connection.cursor()
+        result = SqlCommandExecutor.executeQuery(cursor,queryString,params)
+        cursor.close()
+        del cursor
+        return result
+        
     def executeOneStatement(self,queryString:str,params:tuple=None) -> int:
-        pass
-    @abstractmethod
+        self._raiseOnTransactionInProgress()
+        
+        cursor = self.connection.cursor()
+        result = SqlCommandExecutor.executeOneStatement(cursor,queryString,params)
+        self.connection.commit()
+        cursor.close()
+        del cursor
+        return result
+        
     def executeBulkStatement(self,queryString:str,params:list[tuple]=None) -> None:
-        pass
+        self._raiseOnTransactionInProgress()
+        
+        cursor = self.connection.cursor()
+        SqlCommandExecutor.executeBulkStatement(cursor,queryString,params)
+        self.connection.commit()
+        cursor.close()
+        del cursor
 
-class DatabaseWrapperManager(ABC) :
-
-    def __init__(self, dbConnection) :
-        self.__connection = dbConnection
-    
-
-    @property
-    def connection(self) :
-        return self.__connection
-
-    @abstractmethod
-    def executeQuery(self,queryString:str,params:list=None) -> list[dict[str,object]]:
-        pass
-    
-    @abstractmethod
-    def executeOneStatement(self,queryString:str,params=None) -> int :
-        pass
-    
-    @abstractmethod
-    def executeBulkStatement(self,queryString:str,params=None) -> None:
-        pass
-   
-    @abstractmethod
-    def closeConection(self) -> None:
-        pass
-    
-    @abstractmethod
     def startTransaction(self) -> TransactionWrapper:
-        pass
+        id = datetime.now().strftime('%Y%m%d%H%M%S%f')
+        self._transactionInProgress.append(id)
+        return TransactionWrapper(self,id)        
+    
+    def removeTransactionRegister(self, id) -> None :
+        self._transactionInProgress = [ i for i in self._transactionInProgress if i != id]
+    
+    def _raiseOnTransactionInProgress(self):
+        if(len(self._transactionInProgress) > 0):
+            raise Exception("commit o rollback all pending transaction before execute a new query from manager")
+    
+    def closeConection(self) -> None:
+        self.connection.close()

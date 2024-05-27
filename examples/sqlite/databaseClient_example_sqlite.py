@@ -1,14 +1,12 @@
 
 
 from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
-from databaseConectionManager.core.SupportedDatabasesEnum import DatabaseType
-
-from examples.sqlite import databaseManagerCreator_example
+from examples.sqlite import databaseManagerCreator_example 
 
 
-def createDatabaseManager(dbType: DatabaseType, awsRegion:str, secretManagerArn:str) -> DatabaseWrapperManager :
+def createDatabaseManager(awsRegion:str, secretManagerArn:str) -> DatabaseWrapperManager :
     
-    return databaseManagerCreator_example.createDatabseManager(dbType,awsRegion, secretManagerArn)
+    return databaseManagerCreator_example.createDatabseManager(awsRegion, secretManagerArn)
 
 
 

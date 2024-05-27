@@ -4,9 +4,6 @@ import pyodbc # replace this line with your specific database engine, example: i
 import json
 
 from databaseConectionManager.core.DatabaseWrapperManager import DatabaseWrapperManager
-from databaseConectionManager.factory.SimpleFactory import DatabaseSimpleFactory
-from databaseConectionManager.core.SupportedDatabasesEnum import DatabaseType
-
 
 
 def _getSecretManagerString(awsRegion:str, secretManagerArn:str) -> str :
@@ -49,16 +46,12 @@ def _cretateDbConection(secretManagerJsonObject:dict[str,object]) -> object:
     return pyodbc.connect(connectionString)
 
 
-def createDatabseManager(dbType: DatabaseType, awsRegion:str, secretManagerArn:str) -> DatabaseWrapperManager :
+def createDatabseManager(awsRegion:str, secretManagerArn:str) -> DatabaseWrapperManager :
     
-    # a trip could be add the dbType value to the secret manager
+    
     databaseSecretString = _getSecretManagerString(awsRegion, secretManagerArn)
     databaseSecretJson = json.loads(databaseSecretString)
     dbConection = _cretateDbConection(databaseSecretJson)
     
-    # with the trip the return looks something like
-    # dbTypeName = databaseSecretJson['db_type']
-    # dbType = DatabaseType[dbTypeName]
-    # return DatabaseSimpleFactory.createDatabaseManager(dbType,dbConection)
-    
-    return DatabaseSimpleFactory.createDatabaseManager(dbType,dbConection)
+   
+    return DatabaseWrapperManager(dbConection)
