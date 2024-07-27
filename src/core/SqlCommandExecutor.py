@@ -8,7 +8,7 @@ class SqlCommandExecutor():
             return obj.isoformat()
         return obj
     
-    def executeQuery(cursor,queryString:str,params:list=None) -> list[dict[str,object]]:
+    def executeQuery(cursor,queryString:str,params:tuple=None) -> list[dict[str,object]]:
         
         if (params is None):
             cursor.execute(queryString)
@@ -26,9 +26,11 @@ class SqlCommandExecutor():
         
         rowsCount = -1
         if (params is None):
-            rowsCount = cursor.execute(queryString).rowcount
+            rowsCount = cursor.execute(queryString)
         else:
-            rowsCount = cursor.execute(queryString,params).rowcount
+            rowsCount = cursor.execute(queryString,params)
+        
+        rowsCount = cursor.rowcount
         
         return rowsCount
     

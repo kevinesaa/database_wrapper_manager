@@ -11,7 +11,7 @@ class DatabaseWrapperManager(IDatabaseManager):
         dbConnection.autocommit = False
         self._transactionInProgress = []
         
-    def executeQuery(self,queryString:str,params:list[tuple]=None) -> list[dict[str,object]]:
+    def executeQuery(self,queryString:str,params:tuple=None) -> list[dict[str,object]]:
         
         self._raiseOnTransactionInProgress()
         
@@ -22,6 +22,7 @@ class DatabaseWrapperManager(IDatabaseManager):
         return result
         
     def executeOneStatement(self,queryString:str,params:tuple=None) -> int:
+        
         self._raiseOnTransactionInProgress()
         
         cursor = self.connection.cursor()
@@ -29,9 +30,10 @@ class DatabaseWrapperManager(IDatabaseManager):
         self.connection.commit()
         cursor.close()
         del cursor
-        return result
-        
+        return result    
+
     def executeBulkStatement(self,queryString:str,params:list[tuple]=None) -> None:
+        
         self._raiseOnTransactionInProgress()
         
         cursor = self.connection.cursor()

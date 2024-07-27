@@ -25,7 +25,7 @@ class TransactionWrapper(ITransaction):
         self.dbManager.connection.rollback()
         self._finishTransaction()
     
-    def executeQuery(self,queryString:str,params:list[tuple]=None) -> list[dict[str,object]]:
+    def executeQuery(self,queryString:str,params:tuple=None) -> list[dict[str,object]]:
         cursor = self._cursor
         return SqlCommandExecutor.executeQuery(cursor,queryString,params)
     
