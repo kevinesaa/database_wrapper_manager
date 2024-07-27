@@ -6,7 +6,7 @@ from examples.sqlite import databaseManagerCreator_example
 
 def createDatabaseManager(awsRegion:str, secretManagerArn:str) -> DatabaseWrapperManager :
     
-    return databaseManagerCreator_example.createDatabseManager(awsRegion, secretManagerArn)
+    return databaseManagerCreator_example.createDatabaseManager(awsRegion, secretManagerArn)
 
 
 
@@ -17,7 +17,7 @@ def excuteCliente(event={}, context={}):
     mySecrectManagerArn : str = "" #set as environment
     databaseManager : DatabaseWrapperManager = createDatabaseManager(myRegion, mySecrectManagerArn)
     databaseManager.executeOneStatement("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)")
-    rows : list[dict[str,object]] = databaseManager.executeStatmentWithReturn("INSERT INTO users (name) VALUES ('mario') RETURNING *")
+    rows : list[dict[str,object]] = databaseManager.executeStatmentWithReturning("INSERT INTO users (name) VALUES ('mario') RETURNING *")
     
     print("before")
     for r in rows:

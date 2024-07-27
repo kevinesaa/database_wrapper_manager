@@ -5,7 +5,7 @@ from examples.postgreSql import databaseManagerCreator_example
 
 def createDatabaseManager(awsRegion:str, secretManagerArn:str) -> DatabaseWrapperManager :
     
-    return databaseManagerCreator_example.createDatabseManager(awsRegion, secretManagerArn)
+    return databaseManagerCreator_example.createDatabaseManager(awsRegion, secretManagerArn)
 
 
 
