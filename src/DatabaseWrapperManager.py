@@ -52,5 +52,5 @@ class DatabaseWrapperManager(IDatabaseManager):
         if(len(self._transactionInProgress) > 0):
             raise Exception("commit o rollback all pending transaction before execute a new query from manager")
     
-    def closeConection(self) -> None:
+    def closeConnection(self) -> None:
         self.connection.close()

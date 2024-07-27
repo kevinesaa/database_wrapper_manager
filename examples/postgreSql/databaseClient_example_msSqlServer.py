@@ -19,7 +19,7 @@ def excuteCliente(event={}, context={}):
     rows : list[dict[str,object]] = databaseManager.executeQuery("SELECT * FROM users")
     for r in rows:
         print(r)
-    databaseManager.closeConection()
+    databaseManager.closeConnection()
 
     return {}
     
