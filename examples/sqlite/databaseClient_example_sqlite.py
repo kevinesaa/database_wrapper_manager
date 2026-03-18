@@ -38,8 +38,8 @@ def executeClient(event={}, context={}):
 
     transaction = databaseManager.startTransaction()
     try:
-        transaction.executeQuery("INSERT INTO users (name) VALUES ('luigi')")
-        transaction.executeQuery("INSERT INTO users (name) VALUES ('peach')")
+        transaction.executeOneStatement("INSERT INTO users (name) VALUES ('luigi')")
+        transaction.executeOneStatement("INSERT INTO users (name) VALUES ('peach')")
         transaction.commit()
     except Exception as exception:
         transaction.rollback()
