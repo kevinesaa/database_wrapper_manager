@@ -5,7 +5,7 @@ from .core import ITransaction
 class TransactionWrapper(ITransaction):
     
     def __init__(self, dbManager:IDatabaseManager,id:str) :
-        super().__init__(self,dbManager,id)
+        super().__init__(dbManager,id)
         self.dbManager = dbManager
         self._cursor = dbManager.connection.cursor()
         self._id = id

@@ -12,7 +12,7 @@ def _getSecretManagerString(awsRegion:str, secretManagerArn:str) -> str :
             "db_host":"localhost",
             "db_name":"example",
             "db_user":"admin",
-            "db_pass":"12345678"
+            "db_pass":"12345678",
             "db_port":5432
         }
         '''
@@ -28,7 +28,7 @@ def _createDbConnection(secretManagerJsonObject:dict[str,object]) -> object:
     
     return psycopg2.connect(
         host = secretManagerJsonObject["db_host"],
-        port = int(secretManagerJsonObject["db_host"]),
+        port = int(secretManagerJsonObject["db_port"]),
         user = secretManagerJsonObject["db_user"],
         password = secretManagerJsonObject["db_pass"],
         database = secretManagerJsonObject["db_name"]

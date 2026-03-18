@@ -1,9 +1,10 @@
 from datetime import datetime
 
-from . import TransactionWrapper
+
 from .core import SqlCommandExecutor
 from .core import IDatabaseManager
-
+from .core import ITransaction
+from . import TransactionWrapper
 class DatabaseWrapperManager(IDatabaseManager):
 
     def __init__(self,dbConnection):
@@ -54,10 +55,10 @@ class DatabaseWrapperManager(IDatabaseManager):
         del cursor
         return result
     
-    def startTransaction(self) -> TransactionWrapper:
+    def startTransaction(self) -> ITransaction:
         id = datetime.now().strftime('%Y%m%d%H%M%S%f')
         self._transactionInProgress.append(id)
-        return TransactionWrapper(self,id)        
+        return TransactionWrapper.TransactionWrapper(self,id)
     
     def removeTransactionRegister(self, id) -> None :
         self._transactionInProgress = [ i for i in self._transactionInProgress if i != id]
