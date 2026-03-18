@@ -43,7 +43,7 @@ class DatabaseWrapperManager(IDatabaseManager):
         cursor.close()
         del cursor
     
-    def executeStatmentWithReturning(self,queryString:str,params:tuple=None) -> list[dict[str,object]]:
+    def executeStatementWithReturning(self,queryString:str,params:tuple=None) -> list[dict[str,object]]:
         
         self._raiseOnTransactionInProgress()
 

@@ -33,7 +33,7 @@ class TransactionWrapper(ITransaction):
         cursor = self._cursor
         return SqlCommandExecutor.executeOneStatement(cursor,queryString,params)
     
-    def executeStatmentWithReturning(self,queryString:str,params:tuple=None) -> list[dict[str,object]]:
+    def executeStatementWithReturning(self,queryString:str,params:tuple=None) -> list[dict[str,object]]:
         cursor = self._cursor
         return SqlCommandExecutor.executeQuery(cursor,queryString,params)
     

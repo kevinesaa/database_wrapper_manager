@@ -23,7 +23,7 @@ def _getSecretManagerString(awsRegion:str, secretManagerArn:str) -> str :
 
 
 
-def _cretateDbConnection(secretManagerJsonObject:dict[str,object]) -> object:
+def _createDbConnection(secretManagerJsonObject:dict[str,object]) -> object:
     
     return sqlite3.connect(secretManagerJsonObject["db_path"])
 
@@ -32,6 +32,6 @@ def createDatabaseManager(awsRegion:str, secretManagerArn:str) -> DatabaseWrappe
     
     databaseSecretString = _getSecretManagerString(awsRegion, secretManagerArn)
     databaseSecretJson = json.loads(databaseSecretString)
-    dbConection = _cretateDbConnection(databaseSecretJson)
+    dbConection = _createDbConnection(databaseSecretJson)
     
     return DatabaseWrapperManager(dbConection)

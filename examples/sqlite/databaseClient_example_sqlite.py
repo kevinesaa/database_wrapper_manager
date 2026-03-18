@@ -17,7 +17,7 @@ def excuteCliente(event={}, context={}):
     mySecrectManagerArn : str = "" #set as environment
     databaseManager : DatabaseWrapperManager = createDatabaseManager(myRegion, mySecrectManagerArn)
     databaseManager.executeOneStatement("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)")
-    rows : list[dict[str,object]] = databaseManager.executeStatmentWithReturning("INSERT INTO users (name) VALUES ('mario') RETURNING *")
+    rows : list[dict[str,object]] = databaseManager.executeStatementWithReturning("INSERT INTO users (name) VALUES ('mario') RETURNING *")
     
     print("before")
     for r in rows:
