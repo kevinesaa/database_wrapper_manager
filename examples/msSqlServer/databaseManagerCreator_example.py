@@ -38,6 +38,6 @@ def createDatabaseManager(awsRegion:str, secretManagerArn:str) -> DatabaseWrappe
     
     databaseSecretString = _getSecretManagerString(awsRegion, secretManagerArn)
     databaseSecretJson = json.loads(databaseSecretString)
-    dbConection = _createDbConnection(databaseSecretJson)
-    
-    return DatabaseWrapperManager(dbConection)
+    dbConnection = _createDbConnection(databaseSecretJson)
+
+    return DatabaseWrapperManager(dbConnection)

@@ -27,25 +27,25 @@ def _createDbConnection(secretManagerJsonObject:dict[str,object]) -> object:
     
     # here add the logic to create a specific database connection
     # https://www.ibm.com/docs/en/i/7.4?topic=details-connection-string-keywords
-    dbConfib= {
+    dbConfig = {
         "DRIVER": "IBM i Access ODBC Driver",
         "SYSTEM": secretManagerJsonObject["db_host"],
         "DATABASE": secretManagerJsonObject["db_name"],
         "UID": secretManagerJsonObject["db_user"],
         "PWD": secretManagerJsonObject["db_pass"],
-    } 
+    }
 
     connectionString = ";".join(
-        f"{k}={v}" for k, v in dbConfib.items()
+        f"{k}={v}" for k, v in dbConfig.items()
     )
 
     return pyodbc.connect(connectionString)
 
 
-def createDatabaseManager(awsRegion:str, secretManagerArn:str) -> DatabaseWrapperManager :
+def createDatabaseManager(awsRegion: str, secretManagerArn: str) -> DatabaseWrapperManager:
 
     databaseSecretString = _getSecretManagerString(awsRegion, secretManagerArn)
     databaseSecretJson = json.loads(databaseSecretString)
-    dbConection = _createDbConnection(databaseSecretJson)
-       
-    return DatabaseWrapperManager(dbConection)
+    dbConnection = _createDbConnection(databaseSecretJson)
+
+    return DatabaseWrapperManager(dbConnection)

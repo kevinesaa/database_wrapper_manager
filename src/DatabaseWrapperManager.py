@@ -7,7 +7,7 @@ from .core import ITransaction
 from . import TransactionWrapper
 class DatabaseWrapperManager(IDatabaseManager):
 
-    def __init__(self,dbConnection):
+    def __init__(self, dbConnection):
         super().__init__(dbConnection)
         if(hasattr(dbConnection,"autocommit")):
             dbConnection.autocommit = False

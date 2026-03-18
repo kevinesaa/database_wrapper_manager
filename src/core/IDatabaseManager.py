@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 
 class IDatabaseManager(ABC):
     
-    def __init__(self,dbConection) :
-        self.__connection = dbConection
+    def __init__(self, dbConnection) :
+        self.__connection = dbConnection
 
     @property
     def connection(self) :

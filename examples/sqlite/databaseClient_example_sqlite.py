@@ -10,12 +10,11 @@ def createDatabaseManager(awsRegion:str, secretManagerArn:str) -> DatabaseWrappe
 
 
 
-def excuteCliente(event={}, context={}):
-    
-    
-    myRegion : str = "us-west-2" # change by os.environ['AWS_REGION']
-    mySecrectManagerArn : str = "" #set as environment
-    databaseManager : DatabaseWrapperManager = createDatabaseManager(myRegion, mySecrectManagerArn)
+def executeClient(event={}, context={}):
+
+    myRegion: str = "us-west-2"  # change by os.environ['AWS_REGION']
+    mySecretManagerArn: str = ""  # set as environment
+    databaseManager: DatabaseWrapperManager = createDatabaseManager(myRegion, mySecretManagerArn)
     databaseManager.executeOneStatement("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)")
     databaseManager.executeOneStatement("DELETE FROM users")
 
